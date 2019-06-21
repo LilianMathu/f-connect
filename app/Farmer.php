@@ -12,7 +12,7 @@ class Farmer extends Model
     {
        return $this->hasMany(Produce::class);
     }
-    protected $fillable = ['name', 'email', 'phone', 'password', 'location'];
+    protected $fillable = ['name', 'email', 'phone', 'password', 'location', 'api_token'];
 
 
 }

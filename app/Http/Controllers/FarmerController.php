@@ -15,9 +15,9 @@ class FarmerController extends Controller
         return Farmer::all();
     }
 
-    public function show(Farmer $farmer)
+    public function show($id)
     {
-        return $farmer;
+        return Farmer::find($id);
     }
 
     public function store(Request $request)
@@ -28,18 +28,31 @@ class FarmerController extends Controller
             'phone' => $request->phone,
             'password' => $request->password,
             'location' => $request->location,
-            // 'api_token' => Str::random(60),
+            'api_token' => Str::random(60),
         ]);
 
         return response()->json($farmer, 201);
         // return $this->respondWithToken($api_token);
     }
 
-    public function farmerlogin(Request $request)
+    public function login(Request $request)
     {
       $credentials = $request->only(['email', 'password']);
 
       return $this->respondWithToken($token);
+    }
+
+    public function location(Request $request, $location)
+    {
+        $data = $request->get('data');
+
+        $farmers = Farmer::where('location', 'like', "%{$data}%")
+                         ->get();
+        
+        return Response()->json([
+        'status' => 'success',
+        'data' => $farmers
+    ], 200);
     }
 
     public function update(Request $request, Farmer $farmer)

@@ -16,9 +16,9 @@ class ProduceQualityController extends Controller
         return Produce_Quality::all();
     }
 
-    public function show(Produce_Quality $produce_quality)
+    public function show($id)
     {
-        return $produce_quality;
+        return Produce::find($id);
     }
 
     public function store(Request $request)

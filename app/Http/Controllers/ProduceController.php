@@ -14,9 +14,9 @@ class ProduceController extends Controller
         return Produce::all();
     }
 
-    public function show(Produce $produce)
+    public function show($id)
     {
-        return $produce;
+        return Produce::find($id);
     }
 
     public function store(Request $request)

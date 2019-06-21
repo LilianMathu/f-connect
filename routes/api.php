@@ -19,12 +19,17 @@ Route::middleware('auth:api')->get('/user', function (Request $request) {
     return $request->user();
 });
 
+
 Route::get('farmer', 'FarmerController@index');
 Route::get('farmer/{id}', 'FarmerController@show');
+Route::get('farmer/{location}', 'FarmerController@location');
 Route::post('farmer', 'FarmerController@store');
-Route::post('farmerlogin', 'FarmerController@login');
-Route::put('farmer/{api_token}/{id}', 'FarmerController@update')->middleware('api_token');
-Route::delete('farmer/{id}', 'FarmerController@delete');
+Route::group(['middleware' => 'auth:api'], function () {
+    Route::post('login', 'FarmerController@login');
+    //Route::put('farmer/{api_token}/{id}', 'FarmerController@update')->middleware('api_token');
+    Route::put('farmer/{id}', 'FarmerController@update');
+    Route::delete('farmer/{id}', 'FarmerController@delete');
+});
 
 Route::get('buyer', 'BuyerController@index');
 Route::get('buyer/{id}', 'BuyerController@show');

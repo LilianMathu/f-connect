@@ -14,9 +14,9 @@ class BuyerController extends Controller
         return Buyer::all();
     }
 
-    public function show(Buyer $buyer)
+    public function show($id)
     {
-        return $buyer;
+        return Buyer::find($id);
     }
 
     public function store(Request $request)
