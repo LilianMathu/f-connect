@@ -1,5 +1,10 @@
+.bg {
+    background-image: url("../images/f2.jpeg");
+    background-position: center;
+    background-repeat: no-repeat;
+    background-size: cover;
+    height: 568px;
+}
 body{
-  
     background: #edeff0;
-
 }
